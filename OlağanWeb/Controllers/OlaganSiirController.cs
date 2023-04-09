@@ -181,11 +181,12 @@ public class OlaganSiirController : Controller
         using (SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:sql"]))
         {
             connection.Open();
-            var command = new SqlCommand("INSERT INTO Comments (Comment, TextId, Name, CommentDate) VALUES (@Comment, @TextId, @Name, @CommentDate)", connection);
+            var command = new SqlCommand("INSERT INTO Comments (Comment, TextId, Name, CommentDate, Email) VALUES (@Comment, @TextId, @Name, @CommentDate, @Email)", connection);
             command.Parameters.AddWithValue("@Comment", Comment.Comments);
             command.Parameters.AddWithValue("@TextId", Convert.ToInt16(Comment.TextId));
             command.Parameters.AddWithValue("@Name", Comment.Name);
             command.Parameters.AddWithValue("@CommentDate", DateTime.Now);
+            command.Parameters.AddWithValue("@Email", Comment.Email);
             command.ExecuteNonQuery();
         }
         ModelState.Clear();
