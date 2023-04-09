@@ -1,0 +1,24 @@
+﻿@*@model List<OlağanWeb.Models.TextModel>*@
+
+<link rel="stylesheet" href="~/css/index.css">
+
+<div class="col-md-1"> </div>
+
+<div class="col-md-10" style="position:absolute; margin-top:50px; justify-content: space-between; display:flex; flex-wrap:wrap;">
+
+
+    @*@foreach (var item in Model)*@
+    @for (int i = 0; i < 20; i++)
+    {
+        <div style="width: 17rem;  margin-top: 70px;">
+            <img src="~/img/olaganhikaye1.svg" style="height:150px;" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title ">Writer </h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary" style="width:240px; height:85.6px; text-align:center;">Title Comes Here</a>
+
+            </div>
+        </div>
+    }
+</div>
+

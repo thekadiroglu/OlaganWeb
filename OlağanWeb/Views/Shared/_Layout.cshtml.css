@@ -1,0 +1,108 @@
+﻿.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    background-color: #11100e;
+    min-width: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    height: 180px;
+    overflow-y: auto;
+    top: 27px;
+}
+
+    .dropdown-menu::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    .dropdown-menu li {
+        margin: 10px 0;
+    }
+
+    .dropdown-menu a {
+        color: #faf5f1;
+    }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+nav {
+    background-color: #11100e;
+    height: 50px;
+    margin: 10px;
+    padding: 10px;
+}
+.navbar-ul {
+    display: flex;
+    justify-content: flex-end;
+}
+
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    nav li {
+        margin: 0 10px;
+    }
+
+    nav a {
+        color: #faf5f1;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        nav a:hover {
+            background-color: #faf5f1;
+            color: #11100e;
+        }
+
+a {
+    color: #0077cc;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}

@@ -1,0 +1,86 @@
+﻿
+
+<form method="post">
+
+    @if (ViewBag.hata != null)
+    {
+        <h1>@ViewBag.hata </h1>
+    }
+
+    <div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Başlık</label>
+            <textarea class="form-control" required name="Title" placeholder="Başlık" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+          <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Kategori</label>
+        <textarea class="form-control" required name="Category" placeholder="Kategori" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+   
+       <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Yazar</label>
+        <textarea class="form-control" required name="Writer" placeholder="Yazar" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Sayı</label>
+            <textarea class="form-control" required name="number" placeholder="Sayı" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Fotoğraf</label>
+            <textarea class="form-control" required name="picture" placeholder="Fotoğraf" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Metin</label>
+            <textarea class="form-control" required name="Text" placeholder="Metin" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Referanslar</label>
+            <textarea class="form-control" required name="Referances" placeholder="Referanslar" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
+            <textarea class="form-control" required name="Summary" placeholder="Açıklama" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" name="PublishedInOlaganSiir" class="form-check-input" id="PublishedInOlaganSiir" value="true">
+            <label class="form-check-label" for="PublishedInOlaganSiir"> Olagan Şiir'de Yayınlandı </label>
+        </div>
+
+        <button type="submit"> Ekle </button>
+    </div>
+</form>
+
+
+@{
+    #region
+    @* <div class="mb-3">
+        <div class="form-floating">
+        <select class="form-select" id="floatingSelectGrid">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        </select>
+        <label for="floatingSelectGrid">Works with selects</label>
+        </div>
+        </div>
+
+        <div class="mb-3">
+        <div class="form-floating">
+        <select class="form-select" id="floatingSelectGrid">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        </select>
+        <label for="floatingSelectGrid">Works with selects</label>
+        </div>
+        </div>*@
+
+    #endregion
+}

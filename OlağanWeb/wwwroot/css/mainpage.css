@@ -1,0 +1,44 @@
+﻿
+.image-container:hover .image1 {
+    display: none;
+}
+
+.image1 {
+    position: absolute;
+    transition: opacity 0.5s ease-out;
+}
+
+.image2 {
+    display: none;
+    position: absolute;
+    transition: opacity 0.5s ease-in;
+}
+
+.image-container:hover .image2 {
+    display: block;
+    transition: opacity 0.5s ease;
+}
+
+.image-container2:hover .image1 {
+    display: none;
+}
+
+.image3 {
+    position: absolute;
+    transition: opacity 0.5s ease-out;
+}
+
+.image4 {
+    display: none;
+    position: absolute;
+    transition: opacity 0.5s ease-in;
+}
+
+.image-container2:hover .image4 {
+    display: block;
+    transition: opacity s ease;
+}
+
+.image-container2:hover .image3 {
+    display: none;
+}

@@ -1,0 +1,159 @@
+﻿@model OlağanWeb.Models.ContentVM
+
+
+
+
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+<link rel="stylesheet" href="~/css/comment.css">
+<link rel="stylesheet" href="~/css/index.css">
+
+<div class="col-md-10" style=" margin:auto; display:flex;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div style="flex:1">
+                    <img style="width:710px" src="@ViewBag.Model.picture" />
+                </div>
+            </div>
+            <div class="col-md-4" style="flex:2; background-color: #11100e; display:flex; flex-direction: column; justify-content: space-between; align-items: flex-start">
+                <img src="~/img/q.png" style="width:60%; margin-top:3vh;" />
+                <div>
+                    <p class="rightText" style="font-weight:500 "> <i>@ViewBag.Model.Writer </i></p>
+                    <p class="rightText"> @ViewBag.Model.Title </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="col-md-10" style="position:relative; font-size:larger; margin:auto; margin-top:auto;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div style="flex:1;">
+                        <div style="margin-top:5vh; text-align:justify-all">
+                            @{
+                                string Text = ViewBag.Model.Text;
+                                char initialCap = Text[0];
+                                Text = Text.Substring(1);
+                                @Html.Raw("<div class=\"initial-cap\">" +initialCap + "</div>"+ Text)
+                                ;
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" style=" flex:2;">
+                    <div class="rightText2"><p class="text-center" style="margin-top:3vh;"><strong>Önerilen Yazılar</strong></p></div>
+                    @foreach (var item in Model.TextModels)
+                    {
+                        <div style="width: 17rem; margin:auto;  margin-top: 3vh;">
+                            <img src=@item.picture style="height:150px;" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title ">@item.Writer<br> <i>@item.Category</i>  </h5>
+                                <p class="card-text"> Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="/OlaganSiir/content?a=@item.Id" class="btn btn-primary" style=" width:240px; height:85.6px; text-align:center;"> @item.Title </a>
+                            </div>
+                        </div>
+                    }
+
+                    @if (ViewBag.Model.Referances is not null && ViewBag.Model.Referances != "")
+                    {
+                        <div style="width:17rem; margin:auto; background-color:#11100e">
+                            <h3 class="rightText3" style="text-align:center;">Kaynakça</h3>
+                            <br />
+                            <div style="color:#faf5f1; margin-left:1vh; margin-right:1vh;">
+                                <p>@Html.Raw(@ViewBag.Model.Referances)</p>
+                                <br />
+                            </div>
+                        </div>
+                    }
+                    <div class="share floating-block sticky-top" style="margin-top:3vh;">
+                        <div style="width:17rem;  margin:auto; background-color:#11100e">
+                            <h2 class="rightText3" style="text-align:center; margin-left:1vh; margin-right:1vh">Olağan Şiir'e Abone Ol</h2>
+                            <p class="rightText3 " style="text-align:center; margin-left:1vh; margin-right:1vh">Lorem ipsum dolor sit amet, consectetur.</p>
+                            <form action="#">
+                                <input class="form-control" type="email" required placeholder="Email" rows="3">
+                                <div style="text-align:center;">
+                                    <input type="button" value="Abone Ol" class="btn btn-primary">
+                                </div>
+                                <br />
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+<div class="col-md-10" style=" margin:auto;">
+    <div class="container">
+        <div class="row">
+            <div class="comment-body" style="font-size:5vh;"><h3 style="margin-top:3vh;">Yorumlar</h3></div>
+            <ul class="comment-list" style="margin-top:3vh;">
+                @if (Model.CommentModels.Count > 0)
+                {
+                    @foreach (var item in Model.CommentModels)
+                    {
+                        @if (item.IsActive)
+                        {
+                            <li class="comment">
+                                <div class="comment-body">
+                                    <h3>@item.Name</h3>
+                                    <div class="meta">@item.CommentDate</div>
+                                    <p>@item.Comments</p>
+                                    <hr />
+                                </div>
+                            </li>
+                        }
+                    }
+                }
+                else
+                {
+                    <li class="comment">
+                        <div class="comment-body">
+                            <p>Henüz Yorum Yok</p>
+                            <hr />
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Yorumla </h3>
+
+                <form asp-action="PostComment" asp-controller="olagansiir" method="post">
+
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="Name" required placeholder="İsim Soyisim" rows="3">
+                    </div>
+
+                    <div class="mb-3">
+                        <input class="form-control" type="email" name="Email" required placeholder="Email" rows="3">
+                    </div>
+
+                    <div class="mb-3">
+                        <input class="form-control" type="hidden" name="TextId" value="@ViewBag.Model.Id">
+                    </div>
+
+                    <div class="mb-3">
+                        <textarea class="form-control" required name="Comments" placeholder="Yorum" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+
+
+                    <div class="form-group" style="margin-top:2vh;">
+                        <input type="submit" value="Gönder" class="btn btn-primary btn-md">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
