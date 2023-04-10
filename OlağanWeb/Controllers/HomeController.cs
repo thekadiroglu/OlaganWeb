@@ -11,6 +11,6 @@ namespace OlağanWeb.Controllers
         {
             return View();
         }
-
+    
     }
 }

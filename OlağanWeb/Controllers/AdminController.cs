@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using OlağanWeb.Models;
 using System.Data.SqlClient;
-using System.Reflection;
 
-namespace OlağanWeb.Controllers;
-[Authorize(AuthenticationSchemes = "user")]
+
+namespace OlaganWeb.Controllers;
 public class AdminController : Controller
 {
     readonly IConfiguration _configuration;
@@ -64,12 +63,12 @@ public class AdminController : Controller
                 command.Parameters.AddWithValue("@Summary", Model.Summary);
                 command.Parameters.AddWithValue("@CreatedTime", DateTime.Now);
                 command.Parameters.AddWithValue("@UpdatedTime", DateTime.Now);
-                // connection.Close();
+
                 command.ExecuteNonQuery();
 
                 return RedirectToAction("TextAdded");
             }
-            catch ( Exception Exception)
+            catch
             {
 
                 ViewBag.hata = "İçerik Eklenemedi";
@@ -153,7 +152,7 @@ public class AdminController : Controller
                 connection.Close();
 
                 connection.Open();
-                var command = new SqlCommand("UPDATE Texts SET Title = @Title, CategoryId = @CategoryId, WriterId = @WriterId, Number = @Number, Picture = @Picture, PublishedInOlaganSiir = @PublishedInOlaganSiir, [Text]= @Text, Referances= @Referances, Summary= @Summary, CreatedTime=@CreatedTime,UpdatedTime= @UpdatedTime WHERE Title = '"+Title+"'", connection);
+                var command = new SqlCommand("UPDATE Texts SET Title = @Title, CategoryId = @CategoryId, WriterId = @WriterId, Number = @Number, Picture = @Picture, PublishedInOlaganSiir = @PublishedInOlaganSiir, [Text]= @Text, Referances= @Referances, Summary= @Summary, CreatedTime=@CreatedTime,UpdatedTime= @UpdatedTime WHERE Title = '" + Title + "'", connection);
                 command.Parameters.AddWithValue("@Title", Model.Title);
                 command.Parameters.AddWithValue("@CategoryId", a);
                 command.Parameters.AddWithValue("@WriterId", b);
@@ -175,6 +174,49 @@ public class AdminController : Controller
                 return View();
             }
         }
+    }
+
+    public IActionResult CommentControl()
+    {
+        List<CommentModel> comments = new List<CommentModel>();
+        using (SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:sql"]))
+        {
+            connection.Open();
+            CommentModel comment = new();
+            var commentCommand = new SqlCommand("select CommentId, Comment, c.TextId, c.Name, c.CommentDate,c.IsActive,c.Email,t.Title from comments AS c join texts as t on t.TextId=c.TextId where IsActive = 0", connection);
+
+
+            var reader = commentCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    comment.CommentId = reader.GetInt32(0);
+                    comment.Comments = reader.GetString(1);
+                    comment.TextId = reader.GetInt32(2);
+                    comment.Name = reader.GetString(3);
+                    comment.CommentDate = reader.GetDateTime(4);
+                    comment.IsActive = reader.GetBoolean(5);
+                    comment.Email = reader.GetString(6);
+                    comment.Title= reader.GetString(7);
+                    comments.Add(comment);
+                }
+            }
+        }
+        return View(comments);
+    }
+
+   
+    public IActionResult AcceptComment(int a)
+    {
+        using (SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:sql"]))
+        {
+            connection.Open();
+            var commentCommand = new SqlCommand("UPDATE comments SET IsActive = 1 WHERE CommentId = @ıd", connection);
+            commentCommand.Parameters.AddWithValue("@ıd", a);
+            commentCommand.ExecuteNonQuery();   
+        }
+        return RedirectToAction("CommentControl");
     }
 
 }

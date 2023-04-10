@@ -1,0 +1,22 @@
+﻿@model List<CommentModel>
+
+<link rel="stylesheet" href="~/css/comment.css">
+<link rel="stylesheet" href="~/css/index.css">
+
+
+<ul class="comment-list">
+    @foreach (var item in Model)
+    {
+    <li class="comment">
+        <div class="comment-body">
+                <h3>@item.Title</h3>
+                <h3>@item.Name</h3>
+                <div class="meta" style="color:black; font-weight:bold;">@item.Email</div>
+                <div class="meta">@item.CommentDate</div>
+                <p>@item.Comments</p>
+                <p><a href="/admin/AcceptComment?a=@item.CommentId" class="reply"> Kabul Et</a></p>
+        </div>
+    </li>
+    <hr />
+    }
+</ul>
