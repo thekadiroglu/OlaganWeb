@@ -7,7 +7,7 @@ namespace OlağanWeb.Controllers
     public class HomeController : Controller
     {
 
-        public IActionResult Index(Search search)
+        public IActionResult Index()
         {
             return View();
         }
